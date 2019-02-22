@@ -33,6 +33,7 @@ group :backend, :frontend, :core, :api do
   gem 'with_model', require: false
   gem 'rails-controller-testing', require: false
   gem 'puma', require: false
+  gem 'mutant-rspec', '~> 0.8.24', require: false
 end
 
 group :backend, :frontend do

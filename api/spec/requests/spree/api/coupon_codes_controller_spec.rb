@@ -101,5 +101,29 @@ module Spree
         end
       end
     end
+
+    describe '#load_order' do
+      context 'when trying to load a non-existing order' do
+        it 'returns an error' do
+          post spree.api_order_coupon_codes_path('not_found'), params: { coupon_code: 'not_found' }
+
+          expect(response.status).to eq(404)
+          expect(json_response).to eq({
+            "error" => I18n.t('spree.api.resource_not_found')
+          })
+        end
+      end
+
+      context 'when passing an argument other than an order number' do
+        it 'returns an error' do
+          post spree.api_order_coupon_codes_path(self), params: { coupon_code: 'not_found' }
+
+          expect(response.status).to eq(404)
+          expect(json_response).to eq({
+            "error" => I18n.t('spree.api.resource_not_found')
+          })
+        end
+      end
+    end
   end
 end
